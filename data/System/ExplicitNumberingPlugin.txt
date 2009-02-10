@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="mvlach" date="1063832959" format="1.0" version="1.8"}%
+%META:TOPICINFO{author="BaseUserMapping_333" date="1234129517" format="1.1" version="1.2"}%
 ---+ <nop>%TOPIC%
 
 Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. 
@@ -7,7 +7,7 @@ Use ==---#<nop>==, ==---#<nop>#==, _etc._, to generate numbered headings.
 
 ---++ Syntax Rules
 
----+++ Numbered sequences
+---+++ ##. Numbered sequences
 
    * The default outline numbering sequence uses the notation =#<nop>#...= (with 1-6 dots). The notation is replaced anywhere in the topic. The level number corresponding to the number of dots increases with each use. Each time a level is used, all higher levels are reset to 0.
    * Named numbering sequences can be used with the notation =#<nop>#name#...= for sequence =name=. Named sequences have independent numbering.
@@ -15,7 +15,7 @@ Use ==---#<nop>==, ==---#<nop>#==, _etc._, to generate numbered headings.
       * As a concession to backwards compatibility, =0= re-initializes the sequence at all levels. This comes in handy when using a sequence within headers that are also used in a *%<nop>TOC%*. In that case, start the first heading using something like =---+ Chapter #<nop>#0. Introduction=. You can then safely use the number notation in headings.
    * The rendering of the numbering sequence can be turned into an letter-labeled list by appending a lowercase letter to the notation: =#<nop>#...a=
 
----+++ Numbered headings
+---+++ ##. Numbered headings
 
    * When the =+= character in headings is replaced by =#=, the headings are numbered. Heading numbers are derived from the unnamed sequence and can, therefore, be affected by the syntax above.
       * Tip: Avoid unnamed sequences when using numbered headings.
@@ -74,14 +74,14 @@ The TWiki:Plugin.TocPlugin provides a more complete table of contents and cross-
 
 __Note:__ You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the server where TWiki is running. 
 
-	* Download the ZIP file from the Plugin web (see below)
-	* Unzip ==%TOPIC%.zip== in your twiki installation directory. Content:
-	  | *File:* | *Description:* |
-	  | ==data/System/%TOPIC%.txt== | Plugin topic |
-	  | ==lib/Foswiki/Plugins/%TOPIC%.pm== | Plugin Perl module |
-	* (Dakar) Visit =configure= in your TWiki installation, and enable the plugin in the {Plugins} section.
-	* Test if the installation was successful:
-		* See the Examples section above. The table columns *Rendered* and *Expected* should have the same values.
+   * Download the ZIP file from the Plugin web (see below)
+   * Unzip ==%TOPIC%.zip== in your twiki installation directory. Content:
+     | *File:* | *Description:* |
+     | ==data/System/%TOPIC%.txt== | Plugin topic |
+     | ==lib/Foswiki/Plugins/%TOPIC%.pm== | Plugin Perl module |
+   * (Dakar) Visit =configure= in your TWiki installation, and enable the plugin in the {Plugins} section.
+   * Test if the installation was successful:
+      * See the Examples section above. The table columns *Rendered* and *Expected* should have the same values.
 
 ---++ Plugin Info
 
