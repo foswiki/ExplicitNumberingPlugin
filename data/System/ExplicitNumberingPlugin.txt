@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="micha" date="1234433463" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICINFO{author="ProjectContributor" date="1234433463" format="1.1" reprev="1.2" version="1.2"}%
 ---+ <nop>%TOPIC%
 
 Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. 
