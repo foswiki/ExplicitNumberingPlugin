@@ -26,6 +26,11 @@ use vars qw(
         $debug
     );
 
+use strict;
+use warnings;
+
+our $NO_PREFS_IN_TOPIC = 1;
+
 # This should always be $Rev$ so that Foswiki can determine the checked-in
 # status of the plugin. It is used by the build automation tools, so
 # you should leave it alone.
@@ -34,7 +39,7 @@ $VERSION = '$Rev$';
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
 # of the version number in PLUGINDESCRIPTIONS.
-$RELEASE = 'Foswiki';
+$RELEASE = 'Foswiki 1.0';
 
 $pluginName = 'ExplicitNumberingPlugin';  # Name of this Plugin
 
@@ -116,7 +121,7 @@ sub makeExplicitNumber
     #...Initialize a new, or get the current, numbering from the Sequences
     my @Numbering = ();
     if ( ! defined( $Sequences{$name} ) ) {
-        for $i ( 0 .. $lastLevel ) { $Numbering[$i] = 0; }
+        for my $i ( 0 .. $lastLevel ) { $Numbering[$i] = 0; }
     } else {
         @Numbering = @{$Sequences{$name}};
         #...Re-initialize the sequence
@@ -132,7 +137,8 @@ sub makeExplicitNumber
 
     #...Reset all higher level counts
     if ( $level < $lastLevel ) {
-        for $i ( ($level+1) .. $lastLevel ) { $Numbering[$i] = 0; }
+        for my $i ( ($level+1) .. $lastLevel ) { $Numbering[$i] = 0; }
+
     }
 
     #...Save the altered numbering
@@ -141,7 +147,7 @@ sub makeExplicitNumber
     #...Construct the number
     my $text = '';
     if ( $alist eq '' ) {
-        for $i ( 0 .. $level ) {
+        for my $i ( 0 .. $level ) {
             $text .= "$Numbering[$i]";
             $text .= '.' if ( $i < $level );
         }

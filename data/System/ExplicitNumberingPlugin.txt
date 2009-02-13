@@ -61,7 +61,10 @@ If you have the plugin installed, the *Rendered* and *Expected* columns should b
 
 ---++ <nop>%TOPIC% Global Settings
 
-Plugin settings are stored as preferences variables. To reference a plugin setting write ==%<nop>&lt;plugin&gt;_&lt;setting&gt;%==, i.e. ==%<nop>EXPLICITNUMBERINGPLUGIN_SHORTDESCRIPTION%==
+
+Plugin settings are stored as preferences settings. To retrieve a preference setting write it as a Foswiki Macro:   ==%<nop>&lt;plugin&gt;_ &lt;setting&gt;%==, i.e.  ==%<nop>EXPLICITNUMBERINGPLUGIN_SHORTDESCRIPTION%==
+
+Note: This plugin does not obtain preference settings from this topic.  Settings should be entered in the %USERSWEB%.SitePreferences or Web Preferences topic.  The following settings can be used.
 
    * One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
       * Set SHORTDESCRIPTION = Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. Support also numbered headings.
