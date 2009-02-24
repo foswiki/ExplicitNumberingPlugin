@@ -22,7 +22,7 @@ package Foswiki::Plugins::ExplicitNumberingPlugin;
 
 # =========================
 use vars qw(
-  $web $topic $user $installWeb 
+  $web $topic $user $installWeb
   $debug
 );
 
@@ -77,17 +77,29 @@ sub initPlugin {
 # auto-numbering of heading levels, otherwise the TOC lines will have
 # different number than the heading line (must be done before TOC).
 
-sub preRenderingHandler {    # SMELL:  This breaks numbered headings!
-#sub commonTagsHandler {
+sub commonTagsHandler {
 ### my ( $text ) = @_;   # do not uncomment, use $_[0] instead
 
     ##Foswiki::Func::writeDebug( "- ${pluginName}::commonTagsHandler( $web.$topic )" ) if $debug;
 
+    return if $_[3];    # Called in an include; do not number yet.
+
+  # SMELL:  Use the renderer to remove textarea blocks so that numbers inside of
+  #         textarea tags don't increment.   Required to prevent conflicts with the 
+  #         EditChapterPlugin.  This has been requested to be added to Foswiki::Func
+
+    my $renderer         = $Foswiki::Plugins::SESSION->{renderer};
+    my $removedTextareas = {};
+
     %Sequences = ();
 
+    $_[0] = $renderer->takeOutBlocks( $_[0], 'textarea', $removedTextareas );
     $_[0] =~ s/(^---+\+*)(\#+)([0-9]*)/$1.&makeHeading(length($2), $3)/gem;
     $_[0] =~
 s/\#\#(\w+\#)?([0-9]+)?\.(\.*)([a-zA-Z]?)/&makeExplicitNumber($1,$2,length($3),$4)/ge;
+    $renderer->putBackBlocks( \$_[0], $removedTextareas, 'textarea',
+        'textarea' );
+
 }
 
 # =========================
