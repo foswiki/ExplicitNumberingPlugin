@@ -85,6 +85,7 @@ cross-reference management.
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Plugin Version: | 12 Feb 2009 |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  3 Mar 2009: | Exclude textareas from rendering to improve compatibility with EditChapterPlugin.  Completed rename to Foswiki namespace (Foswiki:Main.GeorgeClark);   Foswikitask:1038 |
 |  12 Feb 2009: | Fixed regular expression to parse enumerated headings (Foswiki:Main.MichaelDaum); \
                   Added support for upper-case alphabetic enumerations (TWiki:Main.DarrenElkerton) | 
 |  21 Nov 2006: | Added reset to specific number based on suggestion by TWiki:Main.SteveWampler. \
