@@ -23,7 +23,7 @@ package Foswiki::Plugins::ExplicitNumberingPlugin;
 # =========================
 use vars qw(
   $web $topic $user $installWeb
-  $debug
+  $debug $bold
 );
 
 use strict;
@@ -66,6 +66,7 @@ sub initPlugin {
     }
 
     $debug = Foswiki::Func::getPreferencesFlag("EXPLICITNUMBERINGPLUGIN_DEBUG");
+    $bold  = Foswiki::Func::getPreferencesFlag("EXPLICITNUMBERINGPLUGIN_BOLD");
 
     # Plugin correctly initialized
     ##Foswiki::Func::writeDebug( "- Foswiki::Plugins::${pluginName}::initPlugin( $web.$topic ) is OK" ) if $debug;
@@ -180,6 +181,10 @@ sub makeExplicitNumber {
         }
     }
 
+    # do we want it bold or not?
+    if ( $bold ) {
+      $text =~ (s/$text/\*$text\*/) ;
+    }
     return $text;
 }
 

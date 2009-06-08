@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" date="1234433463" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICINFO{author="BaseUserMapping_333" date="1244112686" format="1.1" reprev="1.2" version="1.2"}%
 ---+ <nop>%TOPIC%
 
 Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. 
@@ -70,6 +70,8 @@ Note: This plugin does not obtain preference settings from this topic.  Settings
       * Set SHORTDESCRIPTION = Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. Support also numbered headings.
    * Debug plugin: (See output in =data/debug.txt=)
       * Set DEBUG = 0
+   * Bold font the numbering sequence
+      * Set BOLD = 0
 
 ---++ See also
 The Foswiki:Extensions.TocPlugin provides a more complete table of contents and
@@ -85,6 +87,7 @@ cross-reference management.
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Plugin Version: | 12 Feb 2009 |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  4 Jun 2009: | Added a bold preference option; Foswikitask:8167 (Foswiki:Main.SallyHoughton) |
 |  3 Mar 2009: | Exclude textareas from rendering to improve compatibility with EditChapterPlugin.  Completed rename to Foswiki namespace (Foswiki:Main.GeorgeClark);   Foswikitask:1038 |
 |  12 Feb 2009: | Fixed regular expression to parse enumerated headings (Foswiki:Main.MichaelDaum); \
                   Added support for upper-case alphabetic enumerations (TWiki:Main.DarrenElkerton) | 
