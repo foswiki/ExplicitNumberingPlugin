@@ -21,11 +21,6 @@
 package Foswiki::Plugins::ExplicitNumberingPlugin;
 
 # =========================
-use vars qw(
-  $web $topic $user $installWeb
-  $debug $bold
-);
-
 use strict;
 use warnings;
 
@@ -39,13 +34,18 @@ our $VERSION = '$Rev$';
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
 # of the version number in PLUGINDESCRIPTIONS.
-our $RELEASE = '$Foswiki 1.0 beta $';
-
+our $RELEASE = '1.1';
 
 # One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
 our $SHORTDESCRIPTION =
 'Use the ==#<nop>#.,== ==#<nop>#..== etc. notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic\'s text. Also support numbered headings.';
 
+my $web;
+my $topic;
+my $user;
+my $installWeb;
+my $debug;    # Debug setting
+my $bold;     # Configuration flag for bold numbers
 my $maxLevels = 6;    # Maximum number of levels
 my %Sequences;        # Numberings, addressed by the numbering name
 my $lastLevel = $maxLevels - 1;    # Makes the code more readable
@@ -58,6 +58,8 @@ my @alphabet  = (
 sub initPlugin {
     ( $topic, $web, $user, $installWeb ) = @_;
 
+#Foswiki::Func::writeDebug('ExplicitNumbering  - Entering initialization routine');
+
     # check for Plugins.pm versions
     if ( $Foswiki::Plugins::VERSION < 2.0 ) {
         Foswiki::Func::writeWarning( 'Version mismatch between ',
@@ -65,11 +67,38 @@ sub initPlugin {
         return 0;
     }
 
-    $debug = Foswiki::Func::getPreferencesFlag("EXPLICITNUMBERINGPLUGIN_DEBUG");
-    $bold  = Foswiki::Func::getPreferencesFlag("EXPLICITNUMBERINGPLUGIN_BOLD");
+    #  Disable the plugin if context not view
+    if (
+        !(
+               Foswiki::Func::getContext()->{'view'}
+            || Foswiki::Func::getContext()->{'diff'}
+        )
+      )
+    {
+        {
+            Foswiki::Func::writeDebug(
+                'ExplicitNumbering  - Disabled  - not view  context');
+            return 0;
+        }
+    }
 
-    # Plugin correctly initialized
-    ##Foswiki::Func::writeDebug( "- Foswiki::Plugins::${pluginName}::initPlugin( $web.$topic ) is OK" ) if $debug;
+    $debug = Foswiki::Func::getPreferencesFlag("EXPLICITNUMBERINGPLUGIN_DEBUG")
+      || 0;
+    $bold = Foswiki::Func::getPreferencesFlag("EXPLICITNUMBERINGPLUGIN_BOLD")
+      || 0;
+
+    my $alphaseq =
+      Foswiki::Func::getPreferencesValue("EXPLICITNUMBERINGPLUGIN_ALPHASEQ")
+      || "";
+
+    if ($alphaseq) {
+        $alphaseq =~ s/^\s+//;    #Remove leading spaces
+        $alphaseq =~ s/\s+$//;    #Remove trailing spaces
+        @alphabet = split( ',', $alphaseq );
+    }
+
+    Foswiki::Func::writeDebug('ExplicitNumberingPlugin Initialzed ')
+      if ($debug);
 
     return 1;
 }
@@ -81,27 +110,38 @@ sub initPlugin {
 
 sub commonTagsHandler {
 ### my ( $text ) = @_;   # do not uncomment, use $_[0] instead
-
-    ##Foswiki::Func::writeDebug( "- ${pluginName}::commonTagsHandler( $web.$topic )" ) if $debug;
+    Foswiki::Func::writeDebug(
+        'ExplicitNumbering  - Entering common tags handler') if ($debug);
 
     return if $_[3];    # Called in an include; do not number yet.
 
-  # SMELL:  Use the renderer to remove textarea blocks so that numbers inside of
-  #         textarea tags don't increment.   Required to prevent conflicts with the 
-  #         EditChapterPlugin.  This has been requested to be added to Foswiki::Func
+# SMELL:  Use the renderer to remove textarea blocks so that numbers inside of
+#         textarea tags don't increment.   Required to prevent conflicts with the
+#         EditChapterPlugin.  This has been requested to be added to Foswiki::Func
 
     my $renderer         = $Foswiki::Plugins::SESSION->{renderer};
     my $removedTextareas = {};
 
     %Sequences = ();
 
-    $_[0] = $renderer->takeOutBlocks( $_[0], 'textarea', $removedTextareas );
-    $_[0] =~ s/(^---+\+*)(\#+)([0-9]*)/$1.&makeHeading(length($2), $3)/gem;
-    $_[0] =~
-s/\#\#(\w+\#)?([0-9]+)?\.(\.*)([a-zA-Z]?)/&makeExplicitNumber($1,$2,length($3),$4)/ge;
-    $renderer->putBackBlocks( \$_[0], $removedTextareas, 'textarea',
-        'textarea' );
+    eval('$renderer->takeOutBlocks( $_[0], \'textarea\', $removedTextareas )');
+    if ( $@ ne "" ) {
+        $_[0] = Foswiki::takeOutBlocks( $_[0], 'textarea', $removedTextareas );
+    }
 
+    $_[0] =~
+      s/(^---+\+*)(\#+)([[:digit:]]*)/$1.&makeHeading(length($2), $3)/gem;
+    $_[0] =~
+s/\#\#(\w+\#)?([[:digit:]]+)?\.(\.*)([[:alpha:]]?)/&makeExplicitNumber($1,$2,length($3),$4)/ge;
+
+    if ( $@ eq "" ) {
+        $renderer->putBackBlocks( \$_[0], $removedTextareas, 'textarea',
+            'textarea' );
+    }
+    else {
+        Foswiki::putBackBlocks( \$_[0], $removedTextareas, 'textarea',
+            'textarea' );
+    }
 }
 
 # =========================
@@ -173,17 +213,18 @@ sub makeExplicitNumber {
     else {
 
         #...Level is 1-origin, indexing is 0-origin
-        if ( $alist =~ /[A-Z]/ ) {
-            $text .= uc $alphabet[ $Numbering[$level] - 1 ];
+        if ( $alist =~ /[[:upper:]]/ ) {
+            $text .=
+              uc $alphabet[ ( $Numbering[$level] - 1 ) % scalar @alphabet ];
         }
         else {
-            $text .= $alphabet[ $Numbering[$level] - 1 ];
+            $text .= $alphabet[ ( $Numbering[$level] - 1 ) % scalar @alphabet ];
         }
     }
 
     # do we want it bold or not?
-    if ( $bold ) {
-      $text =~ (s/$text/\*$text\*/) ;
+    if ($bold) {
+        $text =~ (s/$text/\*$text\*/);
     }
     return $text;
 }

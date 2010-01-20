@@ -1,7 +1,7 @@
-%META:TOPICINFO{author="BaseUserMapping_333" date="1244112686" format="1.1" reprev="1.2" version="1.2"}%
+%META:TOPICINFO{author="BaseUserMapping_333" date="1263951431" format="1.1" reprev="1.1" version="1.1"}%
 ---+ <nop>%TOPIC%
 
-Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. 
+Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text.
 
 Use ==---#<nop>==, ==---#<nop>#==, _etc._, to generate numbered headings.
 
@@ -13,28 +13,29 @@ Use ==#<nop>#5.==, ==#<nop>#.==, ==#<nop>#.== to start a numbering sequence at 5
 
    * The default outline numbering sequence uses the notation =#<nop>#...= (with 1-6 dots). The notation is replaced anywhere in the topic. The level number corresponding to the number of dots increases with each use. Each time a level is used, all higher levels are reset to 0.
    * Named numbering sequences can be used with the notation =#<nop>#name#...= for sequence =name=. Named sequences have independent numbering.
-   * The numbering of a sequence can be initialized or re-initialized by adding a number =n= into the tag. For example, =#<nop>#name#2...= resets numbering sequence =name= to =2=. The sequence is initialized from the indicated level on.
+   * The numbering of a sequence can be initialized or re-initialized by adding a number =n= into the tag. For example, =#<nop>#name#2...= resets numbering sequence =name= to =2=. The sequence is initialized from the indicated level on. 
       * As a concession to backwards compatibility, =0= re-initializes the sequence at all levels. This comes in handy when using a sequence within headers that are also used in a *%<nop>TOC%*. In that case, start the first heading using something like =---+ Chapter #<nop>#0. Introduction=. You can then safely use the number notation in headings.
    * The rendering of the numbering sequence can be turned into an letter-labeled list by appending a lowercase letter to the notation: =#<nop>#...a=
 
 ---+++ ##. Numbered headings
 
-   * When the =+= character in headings is replaced by =#=, the headings are numbered. Heading numbers are derived from the unnamed sequence and can, therefore, be affected by the syntax above.
+   * When the =+= character in headings is replaced by =#=, the headings are numbered. Heading numbers are derived from the unnamed sequence and can, therefore, be affected by the syntax above. 
       * Tip: Avoid unnamed sequences when using numbered headings.
 
----+++ General comments
+---+++ ##. General comments
    * Numbering count is maintained throughout a single topic. Included topics are considered part of the topic and are numbered in sequence with the including topic.
    * The maximum number of levels is 6, and using levels higher than maximum implies the last level.
    * Non-consecutive increasing levels generate =0= for the skipped levels.
    * Sequence numbering always starts at level 1. A missing first level will result in a =0= to indicate the skipped level.
    * Non-numbered headers do not affect the numbering of numbered headings.
+   * The "alpha" sequence can be changed by plugin setttings. 
 
 ---++ Examples
 
 If you have the plugin installed, the *Rendered* and *Expected* columns should be identical. If you do not have the plugin installed, the *Rendered* column will be the same as the *Source* column.
 
 | *Source* | *Rendered* | *Expected* |
-| #<nop>#. | ##. | 1 |
+| #<nop>#. | ##1. | 1 |
 | #<nop>#.. | ##.. | 1.1 |
 | #<nop>#... | ##... | 1.1.1 |
 | #<nop>#.... | ##.... | 1.1.1.1 |
@@ -51,7 +52,9 @@ If you have the plugin installed, the *Rendered* and *Expected* columns should b
 | Req #<nop>#a#....: | Req ##a#....: | Req 1.1.2.2: |
 | #<nop>#a#....a) | ##a#....a) | a) |
 | #<nop>#a#....a) | ##a#....a) | b) |
+| #<nop>#a#....a) | ##a#....a) | b) |
 | #<nop>#A#....A) | ##A#....A) | A) |
+| #<nop>#A#....A) | ##A#....A) | B) |
 | #<nop>#A#....A) | ##A#....A) | B) |
 | Req #<nop>#a#....: | Req ##a#....: | Req 1.1.2.3: |
 | Section #<nop>#a#.. | Section ##a#.. | Section 1.2 |
@@ -61,21 +64,32 @@ If you have the plugin installed, the *Rendered* and *Expected* columns should b
 
 ---++ <nop>%TOPIC% Global Settings
 
+Plugin settings are stored as preferences settings. To retrieve a preference setting write it as a Foswiki Macro: ==%<nop>&lt;plugin&gt;_ &lt;setting&gt;%==, i.e. ==%<nop>EXPLICITNUMBERINGPLUGIN_SHORTDESCRIPTION%==
 
-Plugin settings are stored as preferences settings. To retrieve a preference setting write it as a Foswiki Macro:   ==%<nop>&lt;plugin&gt;_ &lt;setting&gt;%==, i.e.  ==%<nop>EXPLICITNUMBERINGPLUGIN_SHORTDESCRIPTION%==
+Note: This plugin does not obtain preference settings from this topic. Settings should be entered in the %USERSWEB%.SitePreferences or Web Preferences topic. The following settings can be used.
 
-Note: This plugin does not obtain preference settings from this topic.  Settings should be entered in the %USERSWEB%.SitePreferences or Web Preferences topic.  The following settings can be used.
-
-   * One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
-      * Set SHORTDESCRIPTION = Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. Support also numbered headings.
-   * Debug plugin: (See output in =data/debug.txt=)
-      * Set DEBUG = 0
-   * Bold font the numbering sequence
-      * Set BOLD = 0
-
+   * Bold font the numbering sequence.  If this setting is enabled, the numbers are rendered in a bold font.
+<verbatim>
+      * #Set EXPLICITNUMBERINGPLUGIN_BOLD = 1
+</verbatim>
+   * Alternate collating sequence for letter headings.  This is a commma-separated list of "letters" used in alpha headings.   They should be entered as lower-case letters. The plugin will convert to upper-case as needed.  The example below shows the default sequence,  a reversed sequence, and a Greek letter sequence.  The plugin will "wrap" back to the beginning of the sequence if it is exceeded.
+<sticky>
+<verbatim>
+      * #Set EXPLICITNUMBERINGPLUGIN_ALPHASEQ = a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z
+      * #Set EXPLICITNUMBERINGPLUGIN_ALPHASEQ = z,y,x,w,v,u,t,s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a
+      * #Set EXPLICITNUMBERINGPLUGIN_ALPHASEQ = &#945;,&#946;,&#947;,&#948;,&#949;,&#950;,&#951;,&#952;,&#953;,&#954;,&#955;,&#956;
+</verbatim>
+</sticky>
+   * One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic: Automatically defaults to the below description.
+<verbatim>
+      * #Set EXPLICITNUMBERINGPLUGIN_SHORTDESCRIPTION = Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. Support also numbered headings.
+</verbatim>
+   * Debug plugin: (See output in =data/debug.txt=) This plugin provides minimal debugging information
+<verbatim>
+      * #Set EXPLICITNUMBERINGPLUGIN_DEBUG = 1
+</verbatim>
 ---++ See also
-The Foswiki:Extensions.TocPlugin provides a more complete table of contents and
-cross-reference management.
+The Foswiki:Extensions.TocPlugin provides a more complete table of contents and cross-reference management.
 
 ---++ Plugin Installation Instructions
 %$INSTALL_INSTRUCTIONS%
@@ -83,16 +97,14 @@ cross-reference management.
 ---++ Plugin Info
 
 |  Plugin Author: | TWiki:Main.MartinVlach, Foswiki:Main.ThomasWeigert (21 Nov 2006) |
-|  Copyright: | &copy; 2003, Lynguent, Inc. &copy; 2006, %SYSTEMWEB%.ProjectContributor |
+|  Copyright: | © 2003, Lynguent, Inc. © 2006, %SYSTEMWEB%.ProjectContributor |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Plugin Version: | 12 Feb 2009 |
-|  Change History: | <!-- versions below in reverse order -->&nbsp; |
-|  4 Jun 2009: | Added a bold preference option; Foswikitask:8167 (Foswiki:Main.SallyHoughton) |
-|  3 Mar 2009: | Exclude textareas from rendering to improve compatibility with EditChapterPlugin.  Completed rename to Foswiki namespace (Foswiki:Main.GeorgeClark);   Foswikitask:1038 |
-|  12 Feb 2009: | Fixed regular expression to parse enumerated headings (Foswiki:Main.MichaelDaum); \
-                  Added support for upper-case alphabetic enumerations (TWiki:Main.DarrenElkerton) | 
-|  21 Nov 2006: | Added reset to specific number based on suggestion by TWiki:Main.SteveWampler. \
-                  Added support of numbered headers. Proper handling in table of content. |
+|  Change History: | <!-- versions below in reverse order --> |
+|  4 Jun 2009: | Added a bold preference option; Foswikitask:Item8167 (Foswiki:Main.SallyHoughton) |
+|  3 Mar 2009: | Exclude textareas from rendering to improve compatibility with Foswiki:Extensions.EditChapterPlugin. Completed rename to Foswiki namespace (Foswiki:Main.GeorgeClark); Foswikitask:Item1038 |
+|  12 Feb 2009: | Fixed regular expression to parse enumerated headings (Foswiki:Main.MichaelDaum); Added support for upper-case alphabetic enumerations (TWiki:Main.DarrenElkerton) |
+|  21 Nov 2006: | Added reset to specific number based on suggestion by TWiki:Main.SteveWampler. Added support of numbered headers. Proper handling in table of content. |
 |  17 Sep 2003: | Added alpha-labeled lists. |
 |  12 Aug 2003: | Initialize sequences in startRenderingHandler. Thank you TWiki:Main.IngoKarkat. |
 |  29 Jul 2003: | Initial version |
