@@ -1,5 +1,9 @@
 %META:TOPICINFO{author="BaseUserMapping_333" date="1263951431" format="1.1" reprev="1.1" version="1.1"}%
+<img src="%ATTACHURLPATH%/screenshot.png" alt="Example image" style="float:right" />
+
 ---+ <nop>%TOPIC%
+
+%TOC{depth="2"}%
 
 Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text.
 
@@ -9,7 +13,7 @@ Use ==#<nop>#5.==, ==#<nop>#.==, ==#<nop>#.== to start a numbering sequence at 5
 
 ---++ Syntax Rules
 
----+++ ##. Numbered sequences
+---+++ Numbered sequences
 
    * The default outline numbering sequence uses the notation =#<nop>#...= (with 1-6 dots). The notation is replaced anywhere in the topic. The level number corresponding to the number of dots increases with each use. Each time a level is used, all higher levels are reset to 0.
    * Named numbering sequences can be used with the notation =#<nop>#name#...= for sequence =name=. Named sequences have independent numbering.
@@ -17,12 +21,12 @@ Use ==#<nop>#5.==, ==#<nop>#.==, ==#<nop>#.== to start a numbering sequence at 5
       * As a concession to backwards compatibility, =0= re-initializes the sequence at all levels. This comes in handy when using a sequence within headers that are also used in a *%<nop>TOC%*. In that case, start the first heading using something like =---+ Chapter #<nop>#0. Introduction=. You can then safely use the number notation in headings.
    * The rendering of the numbering sequence can be turned into an letter-labeled list by appending a lowercase letter to the notation: =#<nop>#...a=
 
----+++ ##. Numbered headings
+---+++ Numbered headings
 
    * When the =+= character in headings is replaced by =#=, the headings are numbered. Heading numbers are derived from the unnamed sequence and can, therefore, be affected by the syntax above. 
       * Tip: Avoid unnamed sequences when using numbered headings.
 
----+++ ##. General comments
+---+++ General comments
    * Numbering count is maintained throughout a single topic. Included topics are considered part of the topic and are numbered in sequence with the including topic.
    * The maximum number of levels is 6, and using levels higher than maximum implies the last level.
    * Non-consecutive increasing levels generate =0= for the skipped levels.
@@ -35,7 +39,7 @@ Use ==#<nop>#5.==, ==#<nop>#.==, ==#<nop>#.== to start a numbering sequence at 5
 If you have the plugin installed, the *Rendered* and *Expected* columns should be identical. If you do not have the plugin installed, the *Rendered* column will be the same as the *Source* column.
 
 | *Source* | *Rendered* | *Expected* |
-| #<nop>#. | ##1. | 1 |
+| #<nop>#. | ##. | 1 |
 | #<nop>#.. | ##.. | 1.1 |
 | #<nop>#... | ##... | 1.1.1 |
 | #<nop>#.... | ##.... | 1.1.1.1 |
@@ -61,6 +65,51 @@ If you have the plugin installed, the *Rendered* and *Expected* columns should b
 | Chapter #<nop>#a#. | Chapter ##a#. | Chapter 2 |
 | Section #<nop>#a#.. | Section ##a#.. | Section 2.1 |
 | Section #<nop>#a#.. | Section ##a#.. | Section 2.2 |
+
+---+++ Numbered heading examples
+
+Reset anonymous numbering to ##0. using =#<nop>#0.
+
+<table>
+<tr>
+<td> *Write* </td> <td> *If Installed* </td> <td> *You should see* </td>
+<tr>
+<td> ---# Heading level 1 </td>
+<td>
+---# Heading 
+</td>
+<td>
+---+ 1 Heading
+</td>
+</tr>
+<tr>
+<td> ---## Next level </td>
+<td>
+---## Next level 
+</td>
+<td>
+---++ 1.1 Next level
+</td>
+</tr>
+<tr>
+<td> ---### And another </td>
+<td>
+---### And another 
+</td>
+<td>
+---+++ 1.1.1 And another
+</td>
+</tr>
+<tr>
+<td> ---++# Single numbered </td>
+<td>
+---++# Single numbered 
+</td>
+<td>
+---+++ 2 Single numbered
+</td>
+</tr>
+</table>
 
 ---++ <nop>%TOPIC% Global Settings
 
@@ -116,3 +165,5 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 __Related Topics:__ %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences, [[%SYSTEMWEB%.Plugins][Plugins]]
 
 -- Foswiki:Main.ThomasWeigert - 21 Nov 2006 %BR%
+%META:FILEATTACHMENT{name="screenshot.png" attachment="screenshot.png" attr="h" comment="Screenshot Example" date="1223777089" path="screenshot.png" size="6179" user="ProjectContributor" version="1"}%
+
