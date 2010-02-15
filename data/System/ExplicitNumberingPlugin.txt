@@ -148,8 +148,10 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 |  Plugin Author: | TWiki:Main.MartinVlach, Foswiki:Main.ThomasWeigert (21 Nov 2006) |
 |  Copyright: | © 2003, Lynguent, Inc. © 2006, %SYSTEMWEB%.ProjectContributor |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Plugin Version: | 12 Feb 2009 |
+|  Plugin Version: | %$VERSION% |
+|  Plugin Release: | %$RELEASE% |
 |  Change History: | <!-- versions below in reverse order --> |
+|  15 Feb 2010: | Foswikitask:Item2654 - internal changes compatible with trunk, Foswikitask:Item2665: various enhancements - added alpahbet setting for alpha sequence, Foswikitask:Item8493 - documentation enhancements |
 |  4 Jun 2009: | Added a bold preference option; Foswikitask:Item8167 (Foswiki:Main.SallyHoughton) |
 |  3 Mar 2009: | Exclude textareas from rendering to improve compatibility with Foswiki:Extensions.EditChapterPlugin. Completed rename to Foswiki namespace (Foswiki:Main.GeorgeClark); Foswikitask:Item1038 |
 |  12 Feb 2009: | Fixed regular expression to parse enumerated headings (Foswiki:Main.MichaelDaum); Added support for upper-case alphabetic enumerations (TWiki:Main.DarrenElkerton) |
