@@ -56,10 +56,10 @@ If you have the plugin installed, the *Rendered* and *Expected* columns should b
 | Req #<nop>#a#....: | Req ##a#....: | Req 1.1.2.2: |
 | #<nop>#a#....a) | ##a#....a) | a) |
 | #<nop>#a#....a) | ##a#....a) | b) |
-| #<nop>#a#....a) | ##a#....a) | b) |
+| #<nop>#a#....a) | ##a#....a) | c) |
 | #<nop>#A#....A) | ##A#....A) | A) |
 | #<nop>#A#....A) | ##A#....A) | B) |
-| #<nop>#A#....A) | ##A#....A) | B) |
+| #<nop>#A#....A) | ##A#....A) | C) |
 | Req #<nop>#a#....: | Req ##a#....: | Req 1.1.2.3: |
 | Section #<nop>#a#.. | Section ##a#.. | Section 1.2 |
 | Chapter #<nop>#a#. | Chapter ##a#. | Chapter 2 |

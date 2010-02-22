@@ -67,20 +67,6 @@ sub initPlugin {
         return 0;
     }
 
-    #  Disable the plugin if context not view
-    if (
-        !(
-               Foswiki::Func::getContext()->{'view'}
-            || Foswiki::Func::getContext()->{'diff'}
-        )
-      )
-    {
-        {
-            Foswiki::Func::writeDebug(
-                'ExplicitNumbering  - Disabled  - not view  context');
-            return 0;
-        }
-    }
 
     $debug = Foswiki::Func::getPreferencesFlag("EXPLICITNUMBERINGPLUGIN_DEBUG")
       || 0;
@@ -114,6 +100,21 @@ sub commonTagsHandler {
         'ExplicitNumbering  - Entering common tags handler') if ($debug);
 
     return if $_[3];    # Called in an include; do not number yet.
+
+    #  Disable the plugin if context not view
+    if (
+        !(
+               Foswiki::Func::getContext()->{'view'}
+            || Foswiki::Func::getContext()->{'diff'}
+        )
+      )
+    {
+        {
+            Foswiki::Func::writeDebug(
+                'ExplicitNumbering  - Disabled  - not view  context');
+            return ;
+        }
+    }
 
 # SMELL:  Use the renderer to remove textarea blocks so that numbers inside of
 #         textarea tags don't increment.   Required to prevent conflicts with the
