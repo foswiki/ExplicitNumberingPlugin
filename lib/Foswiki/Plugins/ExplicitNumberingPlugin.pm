@@ -34,11 +34,11 @@ our $VERSION = '$Rev$';
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
 # of the version number in PLUGINDESCRIPTIONS.
-our $RELEASE = '1.1-RC1';
+our $RELEASE = '1.6';
 
 # One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
 our $SHORTDESCRIPTION =
-'Use the ==#<nop>#.,== ==#<nop>#..== etc. notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic\'s text. Also support numbered headings.';
+"Use the ==#<nop>#.,== ==#<nop>#..== etc. notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. Also support numbered headings.";
 
 my $web;
 my $topic;

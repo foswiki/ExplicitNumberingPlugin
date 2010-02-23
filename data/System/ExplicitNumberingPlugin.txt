@@ -1,7 +1,9 @@
-%META:TOPICINFO{author="BaseUserMapping_333" date="1263951431" format="1.1" reprev="1.1" version="1.1"}%
+%META:TOPICINFO{author="ProjectContributor" date="1263951431" format="1.1" reprev="1.1" version="1.1"}%
 <img src="%ATTACHURLPATH%/screenshot.png" alt="Example image" style="float:right" />
 
 ---+ <nop>%TOPIC%
+
+%SHORTDESCRIPTION%
 
 %TOC{depth="2"}%
 
@@ -129,10 +131,6 @@ Note: This plugin does not obtain preference settings from this topic. Settings 
       * #Set EXPLICITNUMBERINGPLUGIN_ALPHASEQ = &#945;,&#946;,&#947;,&#948;,&#949;,&#950;,&#951;,&#952;,&#953;,&#954;,&#955;,&#956;
 </verbatim>
 </sticky>
-   * One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic: Automatically defaults to the below description.
-<verbatim>
-      * #Set EXPLICITNUMBERINGPLUGIN_SHORTDESCRIPTION = Use the ==#<nop>#.==, ==#<nop>#..== _etc._ notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. Support also numbered headings.
-</verbatim>
    * Debug plugin: (See output in =data/debug.txt=) This plugin provides minimal debugging information
 <verbatim>
       * #Set EXPLICITNUMBERINGPLUGIN_DEBUG = 1
@@ -144,6 +142,9 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 %$INSTALL_INSTRUCTIONS%
 
 ---++ Plugin Info
+<!--
+   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+-->
 
 |  Plugin Author: | TWiki:Main.MartinVlach, Foswiki:Main.ThomasWeigert (21 Nov 2006) |
 |  Copyright: | © 2003, Lynguent, Inc. © 2006, %SYSTEMWEB%.ProjectContributor |
@@ -151,7 +152,7 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 |  Plugin Version: | %$VERSION% |
 |  Plugin Release: | %$RELEASE% |
 |  Change History: | <!-- versions below in reverse order --> |
-|  15 Feb 2010: | Foswikitask:Item2654 - internal changes compatible with trunk, Foswikitask:Item2665: various enhancements - added alpahbet setting for alpha sequence, Foswikitask:Item8493 - documentation enhancements |
+|  22 Feb 2010: | Foswikitask:Item2654 - internal changes compatible with trunk, Foswikitask:Item2665: various enhancements - added alpahbet setting for alpha sequence, Foswikitask:Item8493 - documentation enhancements |
 |  4 Jun 2009: | Added a bold preference option; Foswikitask:Item8167 (Foswiki:Main.SallyHoughton) |
 |  3 Mar 2009: | Exclude textareas from rendering to improve compatibility with Foswiki:Extensions.EditChapterPlugin. Completed rename to Foswiki namespace (Foswiki:Main.GeorgeClark); Foswikitask:Item1038 |
 |  12 Feb 2009: | Fixed regular expression to parse enumerated headings (Foswiki:Main.MichaelDaum); Added support for upper-case alphabetic enumerations (TWiki:Main.DarrenElkerton) |
