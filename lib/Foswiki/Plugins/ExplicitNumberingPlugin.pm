@@ -110,8 +110,9 @@ sub commonTagsHandler {
       )
     {
         {
-            Foswiki::Func::writeDebug(
-                'ExplicitNumbering  - Disabled  - not view  context');
+            Foswiki::Func::writeDebug
+                'ExplicitNumbering  - Disabled  - not view  context')
+                if $debug;
             return ;
         }
     }
