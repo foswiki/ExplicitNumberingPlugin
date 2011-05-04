@@ -152,6 +152,7 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 |  Plugin Version: | %$VERSION% |
 |  Plugin Release: | %$RELEASE% |
 |  Change History: | <!-- versions below in reverse order --> |
+|  04 May 2011: | Foswikitask:Item10435 - remove uncoditional debug message |
 |  22 Feb 2010: | Foswikitask:Item2654 - internal changes compatible with trunk, Foswikitask:Item2665: various enhancements - added alpahbet setting for alpha sequence, Foswikitask:Item8493 - documentation enhancements |
 |  4 Jun 2009: | Added a bold preference option; Foswikitask:Item8167 (Foswiki:Main.SallyHoughton) |
 |  3 Mar 2009: | Exclude textareas from rendering to improve compatibility with Foswiki:Extensions.EditChapterPlugin. Completed rename to Foswiki namespace (Foswiki:Main.GeorgeClark); Foswikitask:Item1038 |
@@ -160,13 +161,10 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 |  17 Sep 2003: | Added alpha-labeled lists. |
 |  12 Aug 2003: | Initialize sequences in startRenderingHandler. Thank you TWiki:Main.IngoKarkat. |
 |  29 Jul 2003: | Initial version |
-|  CPAN Dependencies: | none |
-|  Other Dependencies: | none |
-|  Perl Version: | 5.8.0 |
-|  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
+|  Home: | http://foswiki.org/Extensions/%TOPIC% |
+|  Support: | http://foswiki.org/Support/%TOPIC% |
 
 __Related Topics:__ %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences, [[%SYSTEMWEB%.Plugins][Plugins]]
 
--- Foswiki:Main.ThomasWeigert - 21 Nov 2006 %BR%
 %META:FILEATTACHMENT{name="screenshot.png" attachment="screenshot.png" attr="h" comment="Screenshot Example" date="1223777089" path="screenshot.png" size="6179" user="ProjectContributor" version="1"}%
 
