@@ -11,7 +11,7 @@ $build = new Foswiki::Contrib::Build('ExplicitNumberingPlugin');
 # files, but be warned, they can be overridden at upload time!
 
 # name of web to upload to
-$build->{UPLOADTARGETWEB} = 'Sandbox/Beta';
+$build->{UPLOADTARGETWEB} = 'Extensions';
 
 # Full URL of pub directory
 $build->{UPLOADTARGETPUB} = 'http://foswiki.org/pub';
