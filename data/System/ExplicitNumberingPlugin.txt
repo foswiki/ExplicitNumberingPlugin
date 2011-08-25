@@ -147,11 +147,12 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 -->
 
 |  Plugin Author: | TWiki:Main.MartinVlach, Foswiki:Main.ThomasWeigert (21 Nov 2006) |
-|  Copyright: | © 2003, Lynguent, Inc. © 2006, %SYSTEMWEB%.ProjectContributor |
+|  Copyright: | &copy; 2003, Lynguent, Inc. &copy; 2006, %SYSTEMWEB%.ProjectContributor |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Plugin Version: | %$VERSION% |
 |  Plugin Release: | %$RELEASE% |
 |  Change History: | <!-- versions below in reverse order --> |
+|  25 Aug 2011: | Foswikitask:Item11074 - added compatibility to newer foswikis (Foswiki:Main.MichaelDaum) |
 |  04 May 2011: | Foswikitask:Item10435 - remove uncoditional debug message |
 |  22 Feb 2010: | Foswikitask:Item2654 - internal changes compatible with trunk, Foswikitask:Item2665: various enhancements - added alpahbet setting for alpha sequence, Foswikitask:Item8493 - documentation enhancements |
 |  4 Jun 2009: | Added a bold preference option; Foswikitask:Item8167 (Foswiki:Main.SallyHoughton) |

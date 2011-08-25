@@ -34,7 +34,7 @@ our $VERSION = '$Rev$';
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
 # of the version number in PLUGINDESCRIPTIONS.
-our $RELEASE = '1.6.1';
+our $RELEASE = '1.6.2';
 
 # One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
 our $SHORTDESCRIPTION =
@@ -117,33 +117,14 @@ sub commonTagsHandler {
         }
     }
 
-# SMELL:  Use the renderer to remove textarea blocks so that numbers inside of
-#         textarea tags don't increment.   Required to prevent conflicts with the
-#         EditChapterPlugin.  This has been requested to be added to Foswiki::Func
-
-    my $renderer         = $Foswiki::Plugins::SESSION->{renderer};
     my $removedTextareas = {};
 
     %Sequences = ();
 
-    eval('$renderer->takeOutBlocks( $_[0], \'textarea\', $removedTextareas )');
-    if ( $@ ne "" ) {
-        $_[0] = Foswiki::takeOutBlocks( $_[0], 'textarea', $removedTextareas );
-    }
-
-    $_[0] =~
-      s/(^---+\+*)(\#+)([[:digit:]]*)/$1.&makeHeading(length($2), $3)/gem;
-    $_[0] =~
-s/\#\#(\w+\#)?([[:digit:]]+)?\.(\.*)([[:alpha:]]?)/&makeExplicitNumber($1,$2,length($3),$4)/ge;
-
-    if ( $@ eq "" ) {
-        $renderer->putBackBlocks( \$_[0], $removedTextareas, 'textarea',
-            'textarea' );
-    }
-    else {
-        Foswiki::putBackBlocks( \$_[0], $removedTextareas, 'textarea',
-            'textarea' );
-    }
+    $_[0] = takeOutBlocks( $_[0], 'textarea', $removedTextareas );
+    $_[0] =~ s/(^---+\+*)(\#+)([[:digit:]]*)/$1.&makeHeading(length($2), $3)/gem;
+    $_[0] =~ s/\#\#(\w+\#)?([[:digit:]]+)?\.(\.*)([[:alpha:]]?)/&makeExplicitNumber($1,$2,length($3),$4)/ge;
+    putBackBlocks( \$_[0], $removedTextareas, 'textarea', 'textarea' );
 }
 
 # =========================
@@ -232,5 +213,22 @@ sub makeExplicitNumber {
 }
 
 # =========================
+# SMELL:  Use the renderer to remove textarea blocks so that numbers inside of
+#         textarea tags don't increment.   Required to prevent conflicts with the 
+#         EditChapterPlugin.  This has been requested to be added to Foswiki::Func
+
+# compatibility wrapper 
+sub takeOutBlocks {
+  return Foswiki::takeOutBlocks(@_) if defined &Foswiki::takeOutBlocks;
+  return $Foswiki::Plugins::SESSION->{renderer}->takeOutBlocks(@_);
+}
+
+# =========================
+# compatibility wrapper 
+sub putBackBlocks {
+  return Foswiki::putBackBlocks(@_) if defined &Foswiki::putBackBlocks;
+  return $Foswiki::Plugins::SESSION->{renderer}->putBackBlocks(@_);
+}
+
 
 1;
