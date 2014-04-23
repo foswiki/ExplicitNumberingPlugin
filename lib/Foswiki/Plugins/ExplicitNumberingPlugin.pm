@@ -26,15 +26,8 @@ use warnings;
 
 our $NO_PREFS_IN_TOPIC = 1;
 
-# This should always be $Rev$ so that Foswiki can determine the checked-in
-# status of the plugin. It is used by the build automation tools, so
-# you should leave it alone.
-our $VERSION = '$Rev$';
-
-# This is a free-form string you can use to "name" your own plugin version.
-# It is *not* used by the build automation tools, but is reported as part
-# of the version number in PLUGINDESCRIPTIONS.
-our $RELEASE = '1.6.2';
+our $VERSION = '1.62';
+our $RELEASE = '1.62';
 
 # One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
 our $SHORTDESCRIPTION =
