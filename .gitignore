@@ -1,0 +1,10 @@
+*.swp
+*,v
+igp_*
+ExplicitNumberingPlugin.md5
+ExplicitNumberingPlugin.sha1
+ExplicitNumberingPlugin.tgz
+ExplicitNumberingPlugin.txt
+ExplicitNumberingPlugin.zip
+ExplicitNumberingPlugin_installer
+ExplicitNumberingPlugin_installer.pl

@@ -1,9 +1,7 @@
-%META:TOPICINFO{author="ProjectContributor" date="1263951431" format="1.1" reprev="1.1" version="1.1"}%
-<img src="%ATTACHURLPATH%/screenshot.png" alt="Example image" style="float:right" />
-
+%META:TOPICINFO{author="ProjectContributor" date="1263951431" format="1.1" reprev="1.1" version="1"}%
 ---+ <nop>%TOPIC%
-
-%SHORTDESCRIPTION%
+<img src="%ATTACHURLPATH%/screenshot.png" alt="Example image" style="float:right" />
+%FORMFIELD{"Description"}%
 
 %TOC{depth="2"}%
 
@@ -138,21 +136,12 @@ Note: This plugin does not obtain preference settings from this topic. Settings 
 ---++ See also
 The Foswiki:Extensions.TocPlugin provides a more complete table of contents and cross-reference management.
 
----++ Plugin Installation Instructions
+---++ Installation Instructions
 %$INSTALL_INSTRUCTIONS%
 
----++ Plugin Info
-<!--
-   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
--->
-
-|  Plugin Author: | TWiki:Main.MartinVlach, Foswiki:Main.ThomasWeigert (21 Nov 2006) |
-|  Copyright: | &copy; 2003, Lynguent, Inc. &copy; 2006, %SYSTEMWEB%.ProjectContributor |
-|  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Plugin Version: | %$VERSION% |
-|  Plugin Release: | %$RELEASE% |
-|  Change History: | <!-- versions below in reverse order --> |
-|  25 Aug 2011: | Foswikitask:Item11074 - added compatibility to newer foswikis (Foswiki:Main.MichaelDaum) |
+---++ Change History
+|  08 Mar 2016: | Foswikitas:Item14018 - properly prevent duplicate processing of the same heading (Foswiki:Main.MichaelDaum) |
+|  25 Aug 2011: | Foswikitask:Item11074 - added compatibility to newer Foswikis (Foswiki:Main.MichaelDaum) |
 |  04 May 2011: | Foswikitask:Item10435 - remove uncoditional debug message |
 |  22 Feb 2010: | Foswikitask:Item2654 - internal changes compatible with trunk, Foswikitask:Item2665: various enhancements - added alpahbet setting for alpha sequence, Foswikitask:Item8493 - documentation enhancements |
 |  4 Jun 2009: | Added a bold preference option; Foswikitask:Item8167 (Foswiki:Main.SallyHoughton) |
@@ -162,10 +151,17 @@ The Foswiki:Extensions.TocPlugin provides a more complete table of contents and 
 |  17 Sep 2003: | Added alpha-labeled lists. |
 |  12 Aug 2003: | Initialize sequences in startRenderingHandler. Thank you TWiki:Main.IngoKarkat. |
 |  29 Jul 2003: | Initial version |
-|  Home: | http://foswiki.org/Extensions/%TOPIC% |
-|  Support: | http://foswiki.org/Support/%TOPIC% |
 
 __Related Topics:__ %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences, [[%SYSTEMWEB%.Plugins][Plugins]]
 
 %META:FILEATTACHMENT{name="screenshot.png" attachment="screenshot.png" attr="h" comment="Screenshot Example" date="1223777089" path="screenshot.png" size="6179" user="ProjectContributor" version="1"}%
-
+%META:FORM{name="PackageForm"}%
+%META:FIELD{name="Author" title="Author" value="TWiki:Main.MartinVlach, Foswiki:Main.ThomasWeigert (21 Nov 2006)"}%
+%META:FIELD{name="Copyright" title="Copyright" value="&copy; 2003, Lynguent, Inc. &copy; 2006, %25SYSTEMWEB%25.ProjectContributor"}%
+%META:FIELD{name="Description" title="Description" value="%25$SHORTDESCRIPTION%25"}%
+%META:FIELD{name="Home" title="Home" value="http://foswiki.org/Extensions/%TOPIC%"}%
+%META:FIELD{name="License" title="License" value="GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]])"}%
+%META:FIELD{name="Release" title="Release" value="%$RELEASE%"}%
+%META:FIELD{name="Repository" title="Repository" value="https://github.com/foswiki/%TOPIC%"}%
+%META:FIELD{name="Support" title="Support" value="http://foswiki.org/Support/%TOPIC%"}%
+%META:FIELD{name="Version" title="Version" value="%$VERSION%"}%

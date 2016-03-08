@@ -26,12 +26,14 @@ use warnings;
 
 our $NO_PREFS_IN_TOPIC = 1;
 
-our $VERSION = '1.62';
-our $RELEASE = '1.62';
+our $VERSION = '1.63';
+our $RELEASE = '08 Mar 2016';
 
 # One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
 our $SHORTDESCRIPTION =
 "Use the ==#<nop>#.,== ==#<nop>#..== etc. notation to insert outline numbering sequences (1, 1.1, 2, 2.1) in topic's text. Also support numbered headings.";
+
+our $TRANSLATIONTOKEN = "\0ENP\0";
 
 my $web;
 my $topic;
@@ -120,6 +122,8 @@ sub commonTagsHandler {
     $_[0] =~
 s/\#\#(\w+\#)?([[:digit:]]+)?\.(\.*)([[:alpha:]]?)/&makeExplicitNumber($1,$2,length($3),$4)/ge;
     putBackBlocks( \$_[0], $removedTextareas, 'textarea', 'textarea' );
+
+    $_[0] =~ s/$TRANSLATIONTOKEN//g;
 }
 
 # =========================
@@ -136,7 +140,7 @@ sub makeHeading {
         $numlevel .= '.';
     }
 
-    return $result . '##' . $init . $numlevel . ' ';
+    return $result . '##' . $init . $numlevel . $TRANSLATIONTOKEN;
 }
 
 # Build the explicit outline number
